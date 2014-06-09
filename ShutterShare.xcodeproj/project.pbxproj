@@ -33,6 +33,10 @@
 		9BDBE362194659D20045C05B /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9BDBE361194659D20045C05B /* Security.framework */; };
 		9BDBE364194659D70045C05B /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9BDBE363194659D70045C05B /* StoreKit.framework */; };
 		9BDBE366194659DF0045C05B /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9BDBE365194659DE0045C05B /* SystemConfiguration.framework */; };
+		9BDBE36919465C050045C05B /* SearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BDBE36819465C050045C05B /* SearchViewController.m */; };
+		9BDBE36C19465C6B0045C05B /* FriendsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BDBE36B19465C6B0045C05B /* FriendsViewController.m */; };
+		9BDBE36F19465C7E0045C05B /* ProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BDBE36E19465C7E0045C05B /* ProfileViewController.m */; };
+		9BDBE37219465F750045C05B /* CameraViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BDBE37119465F750045C05B /* CameraViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -77,6 +81,14 @@
 		9BDBE361194659D20045C05B /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		9BDBE363194659D70045C05B /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		9BDBE365194659DE0045C05B /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		9BDBE36719465C050045C05B /* SearchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SearchViewController.h; path = ../SearchViewController.h; sourceTree = "<group>"; };
+		9BDBE36819465C050045C05B /* SearchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SearchViewController.m; path = ../SearchViewController.m; sourceTree = "<group>"; };
+		9BDBE36A19465C6B0045C05B /* FriendsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FriendsViewController.h; path = ../FriendsViewController.h; sourceTree = "<group>"; };
+		9BDBE36B19465C6B0045C05B /* FriendsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FriendsViewController.m; path = ../FriendsViewController.m; sourceTree = "<group>"; };
+		9BDBE36D19465C7E0045C05B /* ProfileViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ProfileViewController.h; path = ../ProfileViewController.h; sourceTree = "<group>"; };
+		9BDBE36E19465C7E0045C05B /* ProfileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ProfileViewController.m; path = ../ProfileViewController.m; sourceTree = "<group>"; };
+		9BDBE37019465F750045C05B /* CameraViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CameraViewController.h; path = ../CameraViewController.h; sourceTree = "<group>"; };
+		9BDBE37119465F750045C05B /* CameraViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CameraViewController.m; path = ../CameraViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -165,6 +177,14 @@
 				9BDBE32C194658550045C05B /* Main.storyboard */,
 				9BDBE32F194658550045C05B /* ViewController.h */,
 				9BDBE330194658550045C05B /* ViewController.m */,
+				9BDBE36719465C050045C05B /* SearchViewController.h */,
+				9BDBE36819465C050045C05B /* SearchViewController.m */,
+				9BDBE36A19465C6B0045C05B /* FriendsViewController.h */,
+				9BDBE36B19465C6B0045C05B /* FriendsViewController.m */,
+				9BDBE36D19465C7E0045C05B /* ProfileViewController.h */,
+				9BDBE36E19465C7E0045C05B /* ProfileViewController.m */,
+				9BDBE37019465F750045C05B /* CameraViewController.h */,
+				9BDBE37119465F750045C05B /* CameraViewController.m */,
 				9BDBE332194658550045C05B /* Images.xcassets */,
 				9BDBE321194658550045C05B /* Supporting Files */,
 			);
@@ -297,8 +317,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9BDBE36C19465C6B0045C05B /* FriendsViewController.m in Sources */,
 				9BDBE331194658550045C05B /* ViewController.m in Sources */,
 				9BDBE32B194658550045C05B /* AppDelegate.m in Sources */,
+				9BDBE36919465C050045C05B /* SearchViewController.m in Sources */,
+				9BDBE36F19465C7E0045C05B /* ProfileViewController.m in Sources */,
+				9BDBE37219465F750045C05B /* CameraViewController.m in Sources */,
 				9BDBE327194658550045C05B /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

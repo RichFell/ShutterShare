@@ -1,5 +1,5 @@
 //
-//  ViewController.h
+//  FriendsViewController.h
 //  ShutterShare
 //
 //  Created by Richard Fellure on 6/9/14.
@@ -7,8 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-#import <Parse/Parse.h>
 
-@interface ViewController : PFQueryTableViewController
+@interface FriendsViewController : UIViewController
 
 @end

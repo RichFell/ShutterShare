@@ -8,22 +8,49 @@
 
 #import "ViewController.h"
 
-@interface ViewController ()
+@interface ViewController ()<PFSignUpViewControllerDelegate, PFLogInViewControllerDelegate>
 
 @end
 
 @implementation ViewController
 
+-(id)initWithCoder:(NSCoder *)aDecoder
+{
+    if (self = [super initWithCoder:aDecoder])
+    {
+        self.parseClassName = @"Users";
+    }
+    return self;
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-	// Do any additional setup after loading the view, typically from a nib.
+
 }
 
-- (void)didReceiveMemoryWarning
+-(void)viewDidAppear:(BOOL)animated
 {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+    [super viewDidAppear:animated];
+    if (![PFUser currentUser]) {
+        PFLogInViewController *loginViewController = [PFLogInViewController new];
+        PFSignUpViewController *signUpViewController = [PFSignUpViewController new];
+        loginViewController.delegate = self;
+        signUpViewController.delegate = self;
+
+        loginViewController.signUpController = signUpViewController;
+        [self presentViewController:loginViewController animated:YES completion:nil];
+    }
+}
+
+-(void)logInViewController:(PFLogInViewController *)logInController didLogInUser:(PFUser *)user
+{
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+-(void)logInViewController:(PFLogInViewController *)logInController didFailToLogInWithError:(NSError *)error
+{
+    NSLog(@"Fail to Login");
 }
 
 @end
