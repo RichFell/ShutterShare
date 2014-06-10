@@ -11,6 +11,7 @@
 @implementation Photo
 
 @dynamic image;
+@dynamic caption;
 
 +(id)parseClassName
 {

@@ -8,6 +8,7 @@
 
 #import "ViewController.h"
 #import "Photo.h"
+#import "CameraViewController.h"
 
 @interface ViewController ()<PFSignUpViewControllerDelegate, PFLogInViewControllerDelegate>
 
@@ -65,8 +66,14 @@
     PFTableViewCell *cell = [super tableView:tableView cellForRowAtIndexPath:indexPath object:photo];
 
     cell.imageView.file = photo.image;
+    cell.textLabel.text = photo.caption;
     [cell.imageView loadInBackground];
     return cell;
+}
+
+-(void)unwindSegue: (UIStoryboardSegue *)segue
+{
+    [self refreshControl];
 }
 
 @end
