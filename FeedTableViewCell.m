@@ -10,6 +10,8 @@
 
 @implementation FeedTableViewCell
 
+@synthesize imageViewPhoto, labelCaption;
+
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
@@ -33,6 +35,9 @@
 
 -(void)layoutSubviews
 {
+
+    [super layoutSubviews];
+    self.imageViewPhoto.frame = CGRectMake( 200, 10, 100, 100 );
     
 }
 

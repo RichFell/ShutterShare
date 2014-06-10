@@ -9,6 +9,7 @@
 #import "ViewController.h"
 #import "Photo.h"
 #import "CameraViewController.h"
+#import "FeedTableViewCell.h"
 
 @interface ViewController ()<PFSignUpViewControllerDelegate, PFLogInViewControllerDelegate>
 
@@ -63,11 +64,12 @@
 
 -(PFTableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath object:(Photo *)photo
 {
-    PFTableViewCell *cell = [super tableView:tableView cellForRowAtIndexPath:indexPath object:photo];
+    FeedTableViewCell *cell = (FeedTableViewCell *)[super tableView:tableView cellForRowAtIndexPath:indexPath object:photo];
+//    FeedTableViewCell *cell = (FeedTableViewCell *)[tableView dequeueReusableCellWithIdentifier:@"CellID"];
 
-    cell.imageView.file = photo.image;
-    cell.textLabel.text = photo.caption;
-    [cell.imageView loadInBackground];
+    cell.imageViewPhoto.file = photo.image;
+    cell.labelCaption.text = photo.caption;
+    [cell.imageViewPhoto loadInBackground];
     return cell;
 }
 

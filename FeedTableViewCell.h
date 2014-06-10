@@ -10,5 +10,7 @@
 #import <Parse/Parse.h>
 
 @interface FeedTableViewCell : PFTableViewCell
+@property (weak, nonatomic) IBOutlet PFImageView *imageViewPhoto;
+@property (weak, nonatomic) IBOutlet UILabel *labelCaption;
 
 @end
