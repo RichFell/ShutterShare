@@ -7,6 +7,7 @@
 //
 
 #import "ViewController.h"
+#import "Photo.h"
 
 @interface ViewController ()<PFSignUpViewControllerDelegate, PFLogInViewControllerDelegate>
 
@@ -14,17 +15,18 @@
 
 @implementation ViewController
 
--(id)initWithCoder:(NSCoder *)aDecoder
-{
-    if (self = [super initWithCoder:aDecoder])
-    {
-        self.parseClassName = @"Users";
-    }
-    return self;
-}
+//-(id)initWithCoder:(NSCoder *)aDecoder
+//{
+//    if (self = [super initWithCoder:aDecoder])
+//    {
+//        self.parseClassName = @"Users";
+//    }
+//    return self;
+//}
 
 - (void)viewDidLoad
 {
+    self.parseClassName = @"Photo";
     [super viewDidLoad];
 
 }
@@ -32,15 +34,15 @@
 -(void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
-    if (![PFUser currentUser]) {
-        PFLogInViewController *loginViewController = [PFLogInViewController new];
-        PFSignUpViewController *signUpViewController = [PFSignUpViewController new];
-        loginViewController.delegate = self;
-        signUpViewController.delegate = self;
-
-        loginViewController.signUpController = signUpViewController;
-        [self presentViewController:loginViewController animated:YES completion:nil];
-    }
+//    if (![PFUser currentUser]) {
+//        PFLogInViewController *loginViewController = [PFLogInViewController new];
+//        PFSignUpViewController *signUpViewController = [PFSignUpViewController new];
+//        loginViewController.delegate = self;
+//        signUpViewController.delegate = self;
+//
+//        loginViewController.signUpController = signUpViewController;
+//        [self presentViewController:loginViewController animated:YES completion:nil];
+//    }
 }
 
 -(void)logInViewController:(PFLogInViewController *)logInController didLogInUser:(PFUser *)user
@@ -56,6 +58,15 @@
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     return UITableViewAutomaticDimension;
+}
+
+-(PFTableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath object:(Photo *)photo
+{
+    PFTableViewCell *cell = [super tableView:tableView cellForRowAtIndexPath:indexPath object:photo];
+
+    cell.imageView.file = photo.image;
+    [cell.imageView loadInBackground];
+    return cell;
 }
 
 @end

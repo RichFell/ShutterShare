@@ -8,13 +8,16 @@
 
 #import "AppDelegate.h"
 #import <Parse/Parse.h>
+#import "Photo.h"
 
 @implementation AppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    [Parse setApplicationId:@"D82ooddiReOUVMBEAxlDnaRGcCCzrcfA6006khkY"
-                  clientKey:@"kpBiuulHyJdAptZ5ADiFtTA4sGVamB7bgqLxiTN1"];
+    [Parse setApplicationId:@"iXbFVoUSFxuo7CL3lU9v4X1h70oPQ0o51g07X6y1"
+                  clientKey:@"gtp2kNwZYjvIuSJbjX0m9idYqE95csUOim1C45Q8"];
+    [Photo registerSubclass];
+    [PFUser enableAutomaticUser];
     return YES;
 }
 							

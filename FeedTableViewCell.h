@@ -7,9 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <Parse/Parse.h>
 
-@interface FeedTableViewCell : UITableViewCell
-
-@property UIImageView *userPicturesImageView;
+@interface FeedTableViewCell : PFTableViewCell
 
 @end
