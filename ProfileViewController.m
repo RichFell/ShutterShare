@@ -35,6 +35,8 @@
     [pffile getDataInBackgroundWithBlock:^(NSData *data, NSError *error) {
         self.imageView.image = [UIImage imageWithData:data];
     }];
+    self.navigationItem.title = [PFUser currentUser].username;
+//    self.userActivityInfoLabel.text = [NSString stringWithFormat:@"%@, %@, %@", posts, followers, following];
 }
 
 @end
