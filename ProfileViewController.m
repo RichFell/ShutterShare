@@ -11,7 +11,9 @@
 
 @interface ProfileViewController ()
 @property (weak, nonatomic) IBOutlet UILabel *userActivityInfoLabel;
+@property (weak, nonatomic) IBOutlet UILabel *nameLabel;
 
+@property (weak, nonatomic) IBOutlet UIImageView *imageView;
 @end
 
 @implementation ProfileViewController
@@ -19,12 +21,20 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+}
 
-    self.navigationItem.title = [PFUser currentUser].username;
-//    self.userActivityInfoLabel.text = [NSString stringWithFormat:@"%@, %@, %@", posts, followers, following];
-    
+-(void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
 
+    self.navigationItem.title = [[PFUser currentUser] objectForKey:@"username"];
+    self.nameLabel.text = [[PFUser currentUser] objectForKey:@"name"];
+    //    self.userActivityInfoLabel.text = [NSString stringWithFormat:@"%@, %@, %@", posts, followers, following];
 
+    PFFile *pffile = [[PFUser currentUser] objectForKey:@"profilePic"];
+    [pffile getDataInBackgroundWithBlock:^(NSData *data, NSError *error) {
+        self.imageView.image = [UIImage imageWithData:data];
+    }];
 }
 
 @end
