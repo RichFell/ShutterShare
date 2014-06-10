@@ -55,7 +55,7 @@
                         <segue destination="x9o-Yy-0K2" kind="relationship" relationship="viewControllers" id="zJH-8E-Wfh"/>
                         <segue destination="Sgc-4E-08O" kind="relationship" relationship="viewControllers" id="5S4-ry-Ewi"/>
                         <segue destination="8j8-Xr-5c3" kind="relationship" relationship="viewControllers" id="xMn-6d-h7W"/>
-                        <segue destination="sdf-tE-h9R" kind="relationship" relationship="viewControllers" id="lFG-2p-IXZ"/>
+                        <segue destination="8Jr-26-Gl2" kind="relationship" relationship="viewControllers" id="lFG-2p-IXZ"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="U3E-Mv-kEz" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -169,7 +169,7 @@
             </objects>
             <point key="canvasLocation" x="854" y="626"/>
         </scene>
-        <!--Profile View Controller - Profile-->
+        <!--Profile View Controller-->
         <scene sceneID="6PI-1Y-lNl">
             <objects>
                 <viewController id="sdf-tE-h9R" customClass="ProfileViewController" sceneMemberID="viewController">
@@ -184,16 +184,113 @@
                             <navigationBar contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="wKH-Bz-bZh">
                                 <rect key="frame" x="0.0" y="6" width="320" height="44"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
-                                <items>
-                                    <navigationItem title="Title" id="Hui-kF-F2H"/>
-                                </items>
                             </navigationBar>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Posts   Followers   Following" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="p3u-5A-qfU">
+                                <rect key="frame" x="124" y="127" width="224" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="0             0                0      " lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gud-zR-kRk">
+                                <rect key="frame" x="139" y="109" width="172" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="STv-1A-9fD">
+                                <rect key="frame" x="7" y="76" width="100" height="100"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VYc-ZO-ZaH">
+                                <rect key="frame" x="163" y="156" width="110" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="0.80000001190000003" green="0.80000001190000003" blue="0.80000001190000003" alpha="1" colorSpace="calibratedRGB"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                <state key="normal" title="Edit Your Profile">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <segue destination="CsR-kF-EdH" kind="push" id="hwI-he-wS8"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Profile" id="fg8-ZS-XKA"/>
+                    <navigationItem key="navigationItem" id="npA-NA-SXt"/>
+                    <connections>
+                        <outlet property="userActivityInfoLabel" destination="gud-zR-kRk" id="Y9f-CW-qYe"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zBR-vk-wPR" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1380" y="2028"/>
+        </scene>
+        <!--Edit Profile View Controller-->
+        <scene sceneID="vMa-IO-OgW">
+            <objects>
+                <viewController id="CsR-kF-EdH" customClass="EditProfileViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="UvI-vU-3aT"/>
+                        <viewControllerLayoutGuide type="bottom" id="9LC-TR-vCK"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="wFW-Rm-3EG">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tjB-cq-kdc">
+                                <rect key="frame" x="236" y="204" width="30" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Edit">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="onEditPhotoButtonPressed:" destination="CsR-kF-EdH" eventType="touchUpInside" id="Phj-Lt-pib"/>
+                                </connections>
+                            </button>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Rs4-hh-MMY">
+                                <rect key="frame" x="180" y="71" width="131" height="125"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zQN-pN-deK">
+                                <rect key="frame" x="75" y="209" width="34" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Save">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="onSaveButtonPressed:" destination="CsR-kF-EdH" eventType="touchUpInside" id="Eyz-sm-ABW"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="V5P-Su-XUa"/>
+                    <connections>
+                        <outlet property="imageView" destination="Rs4-hh-MMY" id="W3U-cL-MoQ"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="jfJ-Dw-qDQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1739" y="2489"/>
+        </scene>
+        <!--Navigation Controller - Profile-->
+        <scene sceneID="Ngk-op-ijN">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="8Jr-26-Gl2" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Profile" id="fg8-ZS-XKA"/>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="sqY-Ok-ghO">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="sdf-tE-h9R" kind="relationship" relationship="rootViewController" id="Qba-Vd-644"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="9Qx-PV-Yks" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="854" y="2028"/>
         </scene>

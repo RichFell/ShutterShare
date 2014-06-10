@@ -7,8 +7,10 @@
 //
 
 #import "ProfileViewController.h"
+#import <Parse/Parse.h>
 
 @interface ProfileViewController ()
+@property (weak, nonatomic) IBOutlet UILabel *userActivityInfoLabel;
 
 @end
 
@@ -17,8 +19,8 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-
-   
+    self.navigationItem.title = [PFUser currentUser].username;
+//    self.userActivityInfoLabel.text = [NSString stringWithFormat:@"%@, %@, %@", posts, followers, following];
 }
 
 @end
