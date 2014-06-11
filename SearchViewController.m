@@ -8,44 +8,49 @@
 
 #import "SearchViewController.h"
 
-@interface SearchViewController ()
-
+@interface SearchViewController () <UITableViewDataSource, UITableViewDelegate>
+@property (weak, nonatomic) IBOutlet UITableView *tableView;
+@property NSMutableArray *searchResultsArray;
 @property (weak, nonatomic) IBOutlet UISearchBar *searchBar;
 
 @end
 
 @implementation SearchViewController
 
-
-- (PFQuery *)queryForTable {
-    return [PFUser query];
+-(void)viewDidLoad
+{
+    [super viewDidLoad];
+    self.searchResultsArray = [NSMutableArray new];
 }
 
 - (IBAction)onSearchButtonPressed:(id)sender
 {
     NSString *searchString = self.searchBar.text;
-    NSMutableArray *searchResultsArray = [[NSMutableArray alloc] init];
 
     PFQuery *query = [PFUser query];
     [query whereKey:@"username" equalTo:searchString];
     [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
-
+        [self.searchResultsArray addObjectsFromArray:objects];
+        [self.tableView reloadData];
     }];
-
-
-
 }
 
--(PFTableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath object:(PFUser *)user
+-(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    PFTableViewCell *cell = [[PFTableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:@"ABC"];
-    cell.textLabel.text = [user objectForKey:@"name"];
-    cell.detailTextLabel.text = [user objectForKey:@"username"];
+    return self.searchResultsArray.count;
+}
 
-    cell.imageView.file = [user objectForKey:@"profilePic"];
-    [cell.imageView loadInBackground];
+-(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    PFObject *object = [self.searchResultsArray objectAtIndex:indexPath.row];
+
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell"];
+    cell.textLabel.text = [object objectForKey:@"name"];
+    cell.detailTextLabel.text = [object objectForKey:@"username"];
 
     return cell;
 }
+
+
 
 @end

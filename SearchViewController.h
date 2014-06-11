@@ -9,6 +9,6 @@
 #import "ViewController.h"
 #import <Parse/Parse.h>
 
-@interface SearchViewController : PFQueryTableViewController
+@interface SearchViewController : UIViewController
 
 @end

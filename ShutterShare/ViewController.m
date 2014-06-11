@@ -77,7 +77,7 @@
         [self.tableView reloadData];
     }];
     cell.labelCaption.text = [photoObject objectForKey:@"caption"];
-    cell.commentTextField.text = [NSString stringWithFormat:@"%@/n%@/n%@", [self.commentArray objectAtIndex:0], [self.commentArray objectAtIndex:1], [self.commentArray objectAtIndex:2]];
+//    cell.commentTextField.text = [NSString stringWithFormat:@"%@/n%@/n%@", [self.commentArray objectAtIndex:0], [self.commentArray objectAtIndex:1], [self.commentArray objectAtIndex:2]];
     return cell;
 }
 
