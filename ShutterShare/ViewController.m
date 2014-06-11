@@ -17,18 +17,17 @@
 
 @implementation ViewController
 
-//-(id)initWithCoder:(NSCoder *)aDecoder
-//{
-//    if (self = [super initWithCoder:aDecoder])
-//    {
-//        self.parseClassName = @"Users";
-//    }
-//    return self;
-//}
+-(id)initWithCoder:(NSCoder *)aDecoder
+{
+    if (self = [super initWithCoder:aDecoder])
+    {
+        self.parseClassName = @"Photo";
+    }
+    return self;
+}
 
 - (void)viewDidLoad
 {
-    self.parseClassName = @"Photo";
     [super viewDidLoad];
 
 }
