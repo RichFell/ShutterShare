@@ -62,11 +62,15 @@
     return UITableViewAutomaticDimension;
 }
 
--(PFTableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath object:(Photo *)photo
+-(FeedTableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath object:(Photo *)photo
 {
-    FeedTableViewCell *cell = (FeedTableViewCell *)[super tableView:tableView cellForRowAtIndexPath:indexPath object:photo];
-//    FeedTableViewCell *cell = (FeedTableViewCell *)[tableView dequeueReusableCellWithIdentifier:@"CellID"];
+    FeedTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"CellID"];
 
+    if (cell == nil)
+    {
+        cell = [[FeedTableViewCell alloc]init];
+    }
+    
     cell.imageViewPhoto.file = photo.image;
     cell.labelCaption.text = photo.caption;
     [cell.imageViewPhoto loadInBackground];
