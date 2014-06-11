@@ -16,7 +16,8 @@
 @property UIImagePickerController *imagePickerController;
 @property (weak, nonatomic) IBOutlet UITextField *nameTextField;
 @property (weak, nonatomic) IBOutlet UITextField *emailTextField;
-
+@property (weak, nonatomic) IBOutlet UITextField *telephoneTextField;
+@property (weak, nonatomic) IBOutlet UITextField *websiteTextField;
 
 @end
 
@@ -26,14 +27,35 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    if ([[PFUser currentUser] objectForKey:@"profilePic"]) {
+        PFFile *pffile = [[PFUser currentUser] objectForKey:@"profilePic"];
+        [pffile getDataInBackgroundWithBlock:^(NSData *data, NSError *error) {
+            self.imageView.image = [UIImage imageWithData:data];
+            self.imageView.layer.cornerRadius = 50.0f;
+            self.imageView.clipsToBounds = YES;
+        }];
+    }
+    else {
+        self.imageView.image = [UIImage imageNamed:@"bear"];
+        self.imageView.layer.cornerRadius = 50.0f;
+        self.imageView.clipsToBounds = YES;
+    }
 
     self.nameTextField.text = [[PFUser currentUser] objectForKey:@"name"];
     self.emailTextField.text = [[PFUser currentUser] objectForKey:@"email"];
+    self.emailTextField.text = [[PFUser currentUser] objectForKey:@"website"];
+    self.telephoneTextField.text = [[PFUser currentUser] objectForKey:@"telephone"];
 
     self.nameTextField.borderStyle = UITextBorderStyleLine;
     self.emailTextField.borderStyle = UITextBorderStyleLine;
-}
+    self.websiteTextField.borderStyle = UITextBorderStyleLine;
+    self.telephoneTextField.borderStyle = UITextBorderStyleLine;
 
+
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(dismissKeyboard)];
+    [self.view addGestureRecognizer:tap];
+}
 
 - (IBAction)onEditPhotoButtonPressed:(id)sender
 {
@@ -64,6 +86,9 @@
 {
     [[PFUser currentUser] setObject:self.nameTextField.text forKey:@"name"];
     [[PFUser currentUser] setObject:self.emailTextField.text forKey:@"email"];
+    [[PFUser currentUser] setObject:self.websiteTextField.text forKey:@"website"];
+    [[PFUser currentUser] setObject:self.telephoneTextField.text forKey:@"telephone"];
+
 
     Photo *photo = [Photo objectWithClassName:@"Photo"];
     NSData *imageData = UIImagePNGRepresentation(self.imageView.image);
@@ -73,6 +98,11 @@
     [photo setObject:[PFUser currentUser] forKey:@"user"];
 
     [photo saveInBackground];
+}
+
+-(void)dismissKeyboard
+{
+    [self.view endEditing:YES];
 }
 
 @end

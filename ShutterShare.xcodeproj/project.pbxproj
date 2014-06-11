@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		0EF97F63194797F000B3803A /* EditProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0EF97F62194797F000B3803A /* EditProfileViewController.m */; };
 		0EF97F6619479C8B00B3803A /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = 0EF97F6519479C8B00B3803A /* User.m */; };
+		0EF97F691947BF6B00B3803A /* CustomCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0EF97F681947BF6B00B3803A /* CustomCollectionViewCell.m */; };
 		9BDBE31B194658550045C05B /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9BDBE31A194658550045C05B /* Foundation.framework */; };
 		9BDBE31D194658550045C05B /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9BDBE31C194658550045C05B /* CoreGraphics.framework */; };
 		9BDBE31F194658550045C05B /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9BDBE31E194658550045C05B /* UIKit.framework */; };
@@ -58,6 +59,8 @@
 		0EF97F62194797F000B3803A /* EditProfileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditProfileViewController.m; sourceTree = "<group>"; };
 		0EF97F6419479C8B00B3803A /* User.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = User.h; sourceTree = "<group>"; };
 		0EF97F6519479C8B00B3803A /* User.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = User.m; sourceTree = "<group>"; };
+		0EF97F671947BF6B00B3803A /* CustomCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomCollectionViewCell.h; sourceTree = "<group>"; };
+		0EF97F681947BF6B00B3803A /* CustomCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomCollectionViewCell.m; sourceTree = "<group>"; };
 		9BDBE317194658550045C05B /* ShutterShare.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ShutterShare.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9BDBE31A194658550045C05B /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		9BDBE31C194658550045C05B /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -197,6 +200,8 @@
 				9BDBE36B19465C6B0045C05B /* FriendsViewController.m */,
 				9BDBE36D19465C7E0045C05B /* ProfileViewController.h */,
 				9BDBE36E19465C7E0045C05B /* ProfileViewController.m */,
+				0EF97F671947BF6B00B3803A /* CustomCollectionViewCell.h */,
+				0EF97F681947BF6B00B3803A /* CustomCollectionViewCell.m */,
 				9BDBE37019465F750045C05B /* CameraViewController.h */,
 				9BDBE37119465F750045C05B /* CameraViewController.m */,
 				9BDBE3791946769A0045C05B /* FeedTableViewCell.h */,
@@ -340,6 +345,7 @@
 				9BDBE36C19465C6B0045C05B /* FriendsViewController.m in Sources */,
 				9BDBE331194658550045C05B /* ViewController.m in Sources */,
 				0EF97F63194797F000B3803A /* EditProfileViewController.m in Sources */,
+				0EF97F691947BF6B00B3803A /* CustomCollectionViewCell.m in Sources */,
 				9BDBE32B194658550045C05B /* AppDelegate.m in Sources */,
 				9BDBE3D9194771590045C05B /* Photo.m in Sources */,
 				9BDBE36919465C050045C05B /* SearchViewController.m in Sources */,
