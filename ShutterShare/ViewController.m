@@ -13,7 +13,9 @@
 
 @interface ViewController ()<PFSignUpViewControllerDelegate, PFLogInViewControllerDelegate, UITableViewDataSource, UITableViewDelegate>
 @property NSArray *photos;
+
 @end
+
 
 @implementation ViewController
 
@@ -21,25 +23,25 @@
 {
     [super viewDidLoad];
 }
-
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
     [self queryPhotos];
 }
 
+
 -(void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
-//    if (![PFUser currentUser]) {
-//        PFLogInViewController *loginViewController = [PFLogInViewController new];
-//        PFSignUpViewController *signUpViewController = [PFSignUpViewController new];
-//        loginViewController.delegate = self;
-//        signUpViewController.delegate = self;
-//
-//        loginViewController.signUpController = signUpViewController;
-//        [self presentViewController:loginViewController animated:YES completion:nil];
-//    }
+    if (![PFUser currentUser]) {
+        PFLogInViewController *loginViewController = [PFLogInViewController new];
+        PFSignUpViewController *signUpViewController = [PFSignUpViewController new];
+        loginViewController.delegate = self;
+        signUpViewController.delegate = self;
+
+        loginViewController.signUpController = signUpViewController;
+        [self presentViewController:loginViewController animated:YES completion:nil];
+    }
 }
 
 -(void)logInViewController:(PFLogInViewController *)logInController didLogInUser:(PFUser *)user

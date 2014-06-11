@@ -9,6 +9,7 @@
 #import "AppDelegate.h"
 #import <Parse/Parse.h>
 #import "Photo.h"
+#import "User.h"
 
 @implementation AppDelegate
 
@@ -17,7 +18,7 @@
     [Parse setApplicationId:@"iXbFVoUSFxuo7CL3lU9v4X1h70oPQ0o51g07X6y1"
                   clientKey:@"gtp2kNwZYjvIuSJbjX0m9idYqE95csUOim1C45Q8"];
     [Photo registerSubclass];
-    [PFUser enableAutomaticUser];
+    [User registerSubclass];
     [PFImageView class];
 
     return YES;

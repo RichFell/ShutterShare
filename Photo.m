@@ -12,6 +12,7 @@
 
 @dynamic image;
 @dynamic caption;
+@dynamic user;
 
 +(id)parseClassName
 {

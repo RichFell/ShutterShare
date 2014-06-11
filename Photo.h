@@ -8,10 +8,11 @@
 
 #import <Parse/Parse.h>
 
-@interface Photo : PFObject<PFSubclassing>
+@interface Photo : PFObject <PFSubclassing>
 
 +(id)parseClassName;
 @property PFFile *image;
 @property NSString *caption;
+@property NSString *user;
 
 @end
