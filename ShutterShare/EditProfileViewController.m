@@ -9,15 +9,17 @@
 #import "EditProfileViewController.h"
 #import <Parse/Parse.h>
 #import "Photo.h"
-#import "User.h"
 
-@interface EditProfileViewController () <UIImagePickerControllerDelegate, UINavigationControllerDelegate>
+@interface EditProfileViewController () <UIImagePickerControllerDelegate, UINavigationControllerDelegate, UIAlertViewDelegate>
 @property (weak, nonatomic) IBOutlet UIImageView *imageView;
 @property UIImagePickerController *imagePickerController;
 @property (weak, nonatomic) IBOutlet UITextField *nameTextField;
 @property (weak, nonatomic) IBOutlet UITextField *emailTextField;
 @property (weak, nonatomic) IBOutlet UITextField *telephoneTextField;
 @property (weak, nonatomic) IBOutlet UITextField *websiteTextField;
+@property (weak, nonatomic) IBOutlet UITextField *usernameTextField;
+@property (weak, nonatomic) IBOutlet UITextField *bioTextField;
+@property (weak, nonatomic) IBOutlet UISwitch *postsprivateSwitch;
 
 @end
 
@@ -44,14 +46,17 @@
 
     self.nameTextField.text = [[PFUser currentUser] objectForKey:@"name"];
     self.emailTextField.text = [[PFUser currentUser] objectForKey:@"email"];
-    self.emailTextField.text = [[PFUser currentUser] objectForKey:@"website"];
+    self.websiteTextField.text = [[PFUser currentUser] objectForKey:@"website"];
     self.telephoneTextField.text = [[PFUser currentUser] objectForKey:@"telephone"];
+    self.bioTextField.text = [[PFUser currentUser] objectForKey:@"about"];
+    self.usernameTextField.text = [[PFUser currentUser] objectForKey:@"username"];
 
     self.nameTextField.borderStyle = UITextBorderStyleLine;
     self.emailTextField.borderStyle = UITextBorderStyleLine;
     self.websiteTextField.borderStyle = UITextBorderStyleLine;
     self.telephoneTextField.borderStyle = UITextBorderStyleLine;
-
+    self.bioTextField.borderStyle = UITextBorderStyleLine;
+    self.usernameTextField.borderStyle = UITextBorderStyleLine;
 
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(dismissKeyboard)];
     [self.view addGestureRecognizer:tap];
@@ -84,20 +89,26 @@
 
 - (IBAction)onSaveButtonPressed:(id)sender
 {
-    [[PFUser currentUser] setObject:self.nameTextField.text forKey:@"name"];
-    [[PFUser currentUser] setObject:self.emailTextField.text forKey:@"email"];
-    [[PFUser currentUser] setObject:self.websiteTextField.text forKey:@"website"];
-    [[PFUser currentUser] setObject:self.telephoneTextField.text forKey:@"telephone"];
-    [[PFUser currentUser] saveInBackground];
-
     Photo *photo = [Photo objectWithClassName:@"Photo"];
     NSData *imageData = UIImagePNGRepresentation(self.imageView.image);
     PFFile *photoFile = [PFFile fileWithData:imageData];
-
-    [[PFUser currentUser] setObject:photoFile forKey:@"profilePic"];
     [photo setObject:[PFUser currentUser] forKey:@"user"];
 
+    [[PFUser currentUser] setObject:self.bioTextField.text forKey:@"about"];
+    [[PFUser currentUser] setObject:self.usernameTextField.text forKey:@"username"];
+    [[PFUser currentUser] setObject:self.nameTextField.text forKey:@"name"];
+    [[PFUser currentUser] setObject:self.emailTextField.text forKey:@"email"];
+    [[PFUser currentUser] setObject:self.telephoneTextField.text forKey:@"telephone"];
+    [[PFUser currentUser] setObject:self.websiteTextField.text forKey:@"website"];
+    [[PFUser currentUser] setObject:photoFile forKey:@"profilePic"];
+
     [photo saveInBackground];
+    [[PFUser currentUser] saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+        if (error) {
+            UIAlertView *alertview = [[UIAlertView alloc] initWithTitle:@"Oops!" message:@"The information provided is not valid." delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+            [alertview show];
+        }
+    }];
 }
 
 -(void)dismissKeyboard

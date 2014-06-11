@@ -7,7 +7,6 @@
 //
 
 #import "SearchViewController.h"
-#import "User.h"
 
 @interface SearchViewController ()
 
@@ -27,7 +26,7 @@
 
 }
 
--(PFTableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath object:(User *)user
+-(PFTableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath object:(PFUser *)user
 {
     PFTableViewCell *cell = [super tableView:tableView cellForRowAtIndexPath:indexPath object:user];
     cell.textLabel.text = [user objectForKey:@"name"];
