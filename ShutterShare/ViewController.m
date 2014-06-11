@@ -12,24 +12,25 @@
 #import "FeedTableViewCell.h"
 
 @interface ViewController ()<PFSignUpViewControllerDelegate, PFLogInViewControllerDelegate>
-
+@property NSMutableArray *photos;
 @end
 
 @implementation ViewController
 
--(id)initWithCoder:(NSCoder *)aDecoder
-{
-    if (self = [super initWithCoder:aDecoder])
-    {
-        self.parseClassName = @"Photo";
-    }
-    return self;
-}
+//-(id)initWithCoder:(NSCoder *)aDecoder
+//{
+//    if (self = [super initWithCoder:aDecoder])
+//    {
+//        self.parseClassName = @"Photo";
+//    }
+//    return self;
+//}
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-
+    self.photos = [NSMutableArray array];
+    [self queryPhotos];
 }
 
 -(void)viewDidAppear:(BOOL)animated
@@ -61,18 +62,18 @@
     return UITableViewAutomaticDimension;
 }
 
--(FeedTableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath object:(Photo *)photo
+-(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    return self.photos.count;
+}
+
+-(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     FeedTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"CellID"];
-
-    if (cell == nil)
-    {
-        cell = [[FeedTableViewCell alloc]init];
-    }
-    
-    cell.imageViewPhoto.file = photo.image;
-    cell.labelCaption.text = photo.caption;
-    [cell.imageViewPhoto loadInBackground];
+    Photo *photoObject = [self.photos objectAtIndex:indexPath.row];
+    NSString *imageString = [NSString stringWithFormat:@"%@", photoObject.image];
+    cell.imageViewPhoto.image = [UIImage imageWithData:[NSData dataWithContentsOfFile:imageString]];
+    cell.labelCaption.text = photoObject.caption;
     return cell;
 }
 
@@ -80,5 +81,20 @@
 {
     [self refreshControl];
 }
+
+-(void)queryPhotos
+{
+    PFQuery *query = [PFQuery queryWithClassName:@"Photo"];
+    [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+        NSLog(@"%@, %@", objects, error);
+        for(PFObject *photo in objects)
+        {
+            [self.photos addObject:photo];
+        }
+
+
+    }];
+}
+
 
 @end
