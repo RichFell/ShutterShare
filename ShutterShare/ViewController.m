@@ -11,48 +11,24 @@
 #import "CameraViewController.h"
 #import "FeedTableViewCell.h"
 
-@interface ViewController ()<PFSignUpViewControllerDelegate, PFLogInViewControllerDelegate>
-@property NSMutableSet* sectionHeaders;
-@property NSMutableDictionary *outstandingSectionHeaderQueries;
-@property BOOL shouldReloadOnAppear;
+@interface ViewController ()<PFSignUpViewControllerDelegate, PFLogInViewControllerDelegate, UITableViewDataSource, UITableViewDelegate>
+@property NSArray *photos;
 
 @end
 
 
 @implementation ViewController
 
-@synthesize sectionHeaders;
-@synthesize outstandingSectionHeaderQueries;
-@synthesize shouldReloadOnAppear;
-
--(id)initWithCoder:(NSCoder *)aDecoder
-{
-    if (self = [super initWithCoder:aDecoder])
-    {
-        self.parseClassName = @"Users";
-    }
-    return self;
-}
-
 - (void)viewDidLoad
 {
-    self.parseClassName = @"Photo";
     [super viewDidLoad];
-
-    self.paginationEnabled = YES;
 }
-
--(id)initWithStyle:(UITableViewStyle)style
+-(void)viewWillAppear:(BOOL)animated
 {
-    self = [super initWithStyle:style];
-    if (self)
-    {
-        self.outstandingSectionHeaderQueries = [NSMutableDictionary dictionary];
-
-        self.sectionHeaders = [NSMutableSet setWithCapacity:3];
-    }
-    return self;
+    [super viewWillAppear:animated];
+    [self queryPhotos];
 }
+
 
 -(void)viewDidAppear:(BOOL)animated
 {
@@ -83,29 +59,46 @@
     return UITableViewAutomaticDimension;
 }
 
--(FeedTableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath object:(Photo *)photo
+-(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    return self.photos.count;
+   
+}
+
+-(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     FeedTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"CellID"];
+    PFObject *photoObject = [self.photos objectAtIndex:indexPath.row];
 
-    if (cell == nil)
-    {
-        cell = [[FeedTableViewCell alloc]init];
-    }
-    cell.imageViewPhoto.file = photo.image;
-    cell.labelCaption.text = photo.caption;
-    [cell.imageViewPhoto loadInBackground];
+    PFFile *imageFile = [photoObject objectForKey:@"image"];
+    [imageFile getDataInBackgroundWithBlock:^(NSData *data, NSError *error) {
+        if (!error) {
+            cell.imageView.image = [UIImage imageWithData:data];
+        }
+    }];
+    cell.labelCaption.text = [photoObject objectForKey:@"caption"];
     return cell;
 }
 
--(NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
+-(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    Photo *photo = [Photo objectWithClassName:@"Photo"];
-    return photo.user;
+    return self.photos.count;
 }
 
 -(void)unwindSegue: (UIStoryboardSegue *)segue
 {
     [self refreshControl];
 }
+
+-(void)queryPhotos
+{
+    PFQuery *query = [PFQuery queryWithClassName:@"Photo"];
+    [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+        self.photos = [[NSArray alloc]initWithArray:objects];
+        [self.tableView reloadData];
+        NSLog(@"%i", self.photos.count);
+    }];
+}
+
 
 @end
