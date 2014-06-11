@@ -12,25 +12,46 @@
 #import "FeedTableViewCell.h"
 
 @interface ViewController ()<PFSignUpViewControllerDelegate, PFLogInViewControllerDelegate>
+@property NSMutableSet* sectionHeaders;
+@property NSMutableDictionary *outstandingSectionHeaderQueries;
+@property BOOL shouldReloadOnAppear;
 
 @end
 
+
 @implementation ViewController
 
-//-(id)initWithCoder:(NSCoder *)aDecoder
-//{
-//    if (self = [super initWithCoder:aDecoder])
-//    {
-//        self.parseClassName = @"Users";
-//    }
-//    return self;
-//}
+@synthesize sectionHeaders;
+@synthesize outstandingSectionHeaderQueries;
+@synthesize shouldReloadOnAppear;
+
+-(id)initWithCoder:(NSCoder *)aDecoder
+{
+    if (self = [super initWithCoder:aDecoder])
+    {
+        self.parseClassName = @"Users";
+    }
+    return self;
+}
 
 - (void)viewDidLoad
 {
     self.parseClassName = @"Photo";
     [super viewDidLoad];
 
+    self.paginationEnabled = YES;
+}
+
+-(id)initWithStyle:(UITableViewStyle)style
+{
+    self = [super initWithStyle:style];
+    if (self)
+    {
+        self.outstandingSectionHeaderQueries = [NSMutableDictionary dictionary];
+
+        self.sectionHeaders = [NSMutableSet setWithCapacity:3];
+    }
+    return self;
 }
 
 -(void)viewDidAppear:(BOOL)animated
@@ -70,11 +91,16 @@
     {
         cell = [[FeedTableViewCell alloc]init];
     }
-    
     cell.imageViewPhoto.file = photo.image;
     cell.labelCaption.text = photo.caption;
     [cell.imageViewPhoto loadInBackground];
     return cell;
+}
+
+-(NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
+{
+    Photo *photo = [Photo objectWithClassName:@"Photo"];
+    return photo.user;
 }
 
 -(void)unwindSegue: (UIStoryboardSegue *)segue

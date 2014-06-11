@@ -13,5 +13,6 @@
 +(id)parseClassName;
 @property PFFile *image;
 @property NSString *caption;
+@property NSString *user;
 
 @end
