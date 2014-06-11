@@ -12,5 +12,6 @@
 @interface FeedTableViewCell : UITableViewCell
 @property (weak, nonatomic) IBOutlet UIImageView *imageViewPhoto;
 @property (weak, nonatomic) IBOutlet UILabel *labelCaption;
+@property (weak, nonatomic) IBOutlet UITextView *commentTextField;
 
 @end

@@ -24,11 +24,11 @@
 {
 
     [super layoutSubviews];
-    self.imageViewPhoto.bounds = CGRectMake(0, 10, 50, 50);
-    self.imageViewPhoto.frame = CGRectMake(0, 10, 50, 50);
-    self.imageViewPhoto.contentMode = UIViewContentModeScaleAspectFill;
-
-    [self.superview addSubview:self.imageViewPhoto];
+//    self.imageViewPhoto.bounds = CGRectMake(0, 10, 50, 50);
+//    self.imageViewPhoto.frame = CGRectMake(0, 10, 50, 50);
+//    self.imageViewPhoto.contentMode = UIViewContentModeScaleAspectFill;
+//
+//    [self.superview addSubview:self.imageViewPhoto];
 }
 
 

@@ -13,6 +13,7 @@
 
 @interface ViewController ()<PFSignUpViewControllerDelegate, PFLogInViewControllerDelegate, UITableViewDataSource, UITableViewDelegate>
 @property NSArray *photos;
+@property NSMutableArray *commentArray;
 
 @end
 
@@ -22,6 +23,8 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    self.commentArray = [NSMutableArray array];
+
 }
 -(void)viewWillAppear:(BOOL)animated
 {
@@ -64,14 +67,17 @@
     FeedTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"CellID"];
     PFObject *photoObject = [self.photos objectAtIndex:indexPath.section];
 
+    [self queryCommentsForPhoto:photoObject];
+
     PFFile *imageFile = [photoObject objectForKey:@"image"];
     [imageFile getDataInBackgroundWithBlock:^(NSData *data, NSError *error) {
         if (!error) {
-            cell.imageView.image = [UIImage imageWithData:data];
+            cell.imageViewPhoto.image = [UIImage imageWithData:data];
         }
         [self.tableView reloadData];
     }];
     cell.labelCaption.text = [photoObject objectForKey:@"caption"];
+    cell.commentTextField.text = [NSString stringWithFormat:@"%@/n%@/n%@", [self.commentArray objectAtIndex:0], [self.commentArray objectAtIndex:1], [self.commentArray objectAtIndex:2]];
     return cell;
 }
 
@@ -103,6 +109,25 @@
         }
         [self.tableView reloadData];
         NSLog(@"%i", self.photos.count);
+    }];
+}
+
+-(void)queryCommentsForPhoto: (PFObject *)photo
+{
+    PFQuery *query = [PFQuery queryWithClassName:@"Comment"];
+    [query whereKey:@"photo" equalTo:photo];
+    [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+        if (!error)
+        {
+//            self.commentArray = [[NSArray alloc]initWithArray:objects];
+            for (PFObject *commentObject in objects)
+            {
+                NSString *comment = [commentObject objectForKey:@"commentText"];
+                [self.commentArray addObject:comment];
+
+            }
+        }
+        [self.tableView reloadData];
     }];
 }
 
