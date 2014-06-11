@@ -1,0 +1,34 @@
+//
+//  ProfileViewController.m
+//  ShutterShare
+//
+//  Created by Richard Fellure on 6/9/14.
+//  Copyright (c) 2014 Rich. All rights reserved.
+//
+
+#import "ProfileViewController.h"
+#import <Parse/Parse.h>
+
+@interface ProfileViewController ()
+@property (weak, nonatomic) IBOutlet UILabel *userActivityInfoLabel;
+
+@end
+
+@implementation ProfileViewController
+
+- (void)viewDidLoad
+{
+    [super viewDidLoad];
+
+<<<<<<< HEAD
+   
+=======
+    self.navigationItem.title = [PFUser currentUser].username;
+//    self.userActivityInfoLabel.text = [NSString stringWithFormat:@"%@, %@, %@", posts, followers, following];
+    
+
+
+>>>>>>> f0f5fe47c507b3710ba639af7573b372fbc4551f
+}
+
+@end
