@@ -59,12 +59,6 @@
     return UITableViewAutomaticDimension;
 }
 
--(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
-{
-    return self.photos.count;
-   
-}
-
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     FeedTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"CellID"];
@@ -80,14 +74,20 @@
     return cell;
 }
 
+-(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    return 1;
+}
+
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
     return self.photos.count;
 }
 
--(void)unwindSegue: (UIStoryboardSegue *)segue
+-(NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
 {
-    [self refreshControl];
+    PFObject *photo = [self.photos objectAtIndex:section];
+    return [photo objectForKey:@"user"];
 }
 
 -(void)queryPhotos
