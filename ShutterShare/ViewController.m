@@ -69,6 +69,7 @@
         if (!error) {
             cell.imageView.image = [UIImage imageWithData:data];
         }
+        [self.tableView reloadData];
     }];
     cell.labelCaption.text = [photoObject objectForKey:@"caption"];
     return cell;
@@ -76,25 +77,28 @@
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 1;
-}
-
--(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
-{
     return self.photos.count;
 }
 
--(NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
-{
-    PFObject *photo = [self.photos objectAtIndex:section];
-    return [photo objectForKey:@"user"];
-}
+//-(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+//{
+//    return self.photos.count;
+//}
+//
+//-(NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
+//{
+//    PFObject *photo = [self.photos objectAtIndex:section];
+//    return  [photo objectForKey:@"user"];
+//}
 
 -(void)queryPhotos
 {
     PFQuery *query = [PFQuery queryWithClassName:@"Photo"];
     [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
-        self.photos = [[NSArray alloc]initWithArray:objects];
+        if (!error)
+        {
+            self.photos = [[NSArray alloc]initWithArray:objects];
+        }
         [self.tableView reloadData];
         NSLog(@"%i", self.photos.count);
     }];
