@@ -12,7 +12,7 @@
 #import "FeedTableViewCell.h"
 
 @interface ViewController ()<PFSignUpViewControllerDelegate, PFLogInViewControllerDelegate>
-@property NSMutableArray *photos;
+@property NSArray *photos;
 @end
 
 @implementation ViewController
@@ -86,13 +86,9 @@
 {
     PFQuery *query = [PFQuery queryWithClassName:@"Photo"];
     [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
-        NSLog(@"%@, %@", objects, error);
-        for(PFObject *photo in objects)
-        {
-            [self.photos addObject:photo];
-        }
+        self.photos = [[NSArray alloc]initWithArray:objects];
 
-
+        NSLog(@"%@", self.photos);
     }];
 }
 
