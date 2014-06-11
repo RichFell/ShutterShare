@@ -23,14 +23,27 @@
 
 - (IBAction)onSearchButtonPressed:(id)sender
 {
+    NSString *searchString = self.searchBar.text;
+    NSMutableArray *searchResultsArray = [[NSMutableArray alloc] init];
+
+    PFQuery *query = [PFUser query];
+    [query whereKey:@"username" equalTo:searchString];
+    [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+
+    }];
+
+
 
 }
 
 -(PFTableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath object:(PFUser *)user
 {
-    PFTableViewCell *cell = [super tableView:tableView cellForRowAtIndexPath:indexPath object:user];
+    PFTableViewCell *cell = [[PFTableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:@"ABC"];
     cell.textLabel.text = [user objectForKey:@"name"];
     cell.detailTextLabel.text = [user objectForKey:@"username"];
+
+    cell.imageView.file = [user objectForKey:@"profilePic"];
+    [cell.imageView loadInBackground];
 
     return cell;
 }
