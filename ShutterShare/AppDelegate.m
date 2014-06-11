@@ -18,6 +18,8 @@
                   clientKey:@"gtp2kNwZYjvIuSJbjX0m9idYqE95csUOim1C45Q8"];
     [Photo registerSubclass];
     [PFUser enableAutomaticUser];
+    [PFImageView class];
+
     return YES;
 }
 							
