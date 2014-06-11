@@ -10,7 +10,6 @@
 #import <Parse/Parse.h>
 #import "Photo.h"
 #import "CustomCollectionViewCell.h"
-#import <QuartzCore/QuartzCore.h>
 
 @interface ProfileViewController () <UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout>
 @property (weak, nonatomic) IBOutlet UILabel *userActivityInfoLabel;
@@ -45,14 +44,14 @@
         PFFile *pffile = [[PFUser currentUser] objectForKey:@"profilePic"];
         [pffile getDataInBackgroundWithBlock:^(NSData *data, NSError *error) {
             self.imageView.image = [UIImage imageWithData:data];
-            self.imageView.layer.cornerRadius = 50.0f;
+            self.imageView.layer.cornerRadius = self.imageView.frame.size.width /2;
             self.imageView.clipsToBounds = YES;
         }];
     }
     else
     {
         self.imageView.image = [UIImage imageNamed:@"bear"];
-        self.imageView.layer.cornerRadius = 50.0f;
+        self.imageView.layer.cornerRadius = self.imageView.frame.size.width /2;
         self.imageView.clipsToBounds = YES;
     }
 }

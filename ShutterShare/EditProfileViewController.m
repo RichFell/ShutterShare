@@ -32,13 +32,13 @@
         PFFile *pffile = [[PFUser currentUser] objectForKey:@"profilePic"];
         [pffile getDataInBackgroundWithBlock:^(NSData *data, NSError *error) {
             self.imageView.image = [UIImage imageWithData:data];
-            self.imageView.layer.cornerRadius = 50.0f;
+            self.imageView.layer.cornerRadius = self.imageView.frame.size.width /2;
             self.imageView.clipsToBounds = YES;
         }];
     }
     else {
         self.imageView.image = [UIImage imageNamed:@"bear"];
-        self.imageView.layer.cornerRadius = 50.0f;
+        self.imageView.layer.cornerRadius = self.imageView.frame.size.width /2;
         self.imageView.clipsToBounds = YES;
     }
 
@@ -88,7 +88,7 @@
     [[PFUser currentUser] setObject:self.emailTextField.text forKey:@"email"];
     [[PFUser currentUser] setObject:self.websiteTextField.text forKey:@"website"];
     [[PFUser currentUser] setObject:self.telephoneTextField.text forKey:@"telephone"];
-
+    [[PFUser currentUser] saveInBackground];
 
     Photo *photo = [Photo objectWithClassName:@"Photo"];
     NSData *imageData = UIImagePNGRepresentation(self.imageView.image);

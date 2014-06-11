@@ -12,5 +12,9 @@
 
 +(id)parseClassName;
 @property PFFile *profilePic;
+@property NSString *name;
+@property NSString *username;
+@property NSString *email;
+
 
 @end

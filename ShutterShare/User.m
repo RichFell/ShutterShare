@@ -10,6 +10,9 @@
 
 @implementation User
 @dynamic profilePic;
+@dynamic name;
+@dynamic username;
+@dynamic email;
 
 +(id)parseClassName
 {
