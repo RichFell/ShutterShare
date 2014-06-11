@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		0EBDF93D1948D1D400212FD5 /* SearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0EBDF93C1948D1D400212FD5 /* SearchViewController.m */; };
 		0EF97F63194797F000B3803A /* EditProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0EF97F62194797F000B3803A /* EditProfileViewController.m */; };
-		0EF97F6619479C8B00B3803A /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = 0EF97F6519479C8B00B3803A /* User.m */; };
 		0EF97F691947BF6B00B3803A /* CustomCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0EF97F681947BF6B00B3803A /* CustomCollectionViewCell.m */; };
 		9BDBE31B194658550045C05B /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9BDBE31A194658550045C05B /* Foundation.framework */; };
 		9BDBE31D194658550045C05B /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9BDBE31C194658550045C05B /* CoreGraphics.framework */; };
@@ -59,8 +58,6 @@
 		0EBDF93C1948D1D400212FD5 /* SearchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SearchViewController.m; path = ../SearchViewController.m; sourceTree = "<group>"; };
 		0EF97F61194797F000B3803A /* EditProfileViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditProfileViewController.h; sourceTree = "<group>"; };
 		0EF97F62194797F000B3803A /* EditProfileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditProfileViewController.m; sourceTree = "<group>"; };
-		0EF97F6419479C8B00B3803A /* User.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = User.h; sourceTree = "<group>"; };
-		0EF97F6519479C8B00B3803A /* User.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = User.m; sourceTree = "<group>"; };
 		0EF97F671947BF6B00B3803A /* CustomCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomCollectionViewCell.h; sourceTree = "<group>"; };
 		0EF97F681947BF6B00B3803A /* CustomCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomCollectionViewCell.m; sourceTree = "<group>"; };
 		9BDBE317194658550045C05B /* ShutterShare.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ShutterShare.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -208,8 +205,6 @@
 				9BDBE37A1946769A0045C05B /* FeedTableViewCell.m */,
 				9BDBE3D7194771590045C05B /* Photo.h */,
 				9BDBE3D8194771590045C05B /* Photo.m */,
-				0EF97F6419479C8B00B3803A /* User.h */,
-				0EF97F6519479C8B00B3803A /* User.m */,
 				9BDBE332194658550045C05B /* Images.xcassets */,
 				9BDBE321194658550045C05B /* Supporting Files */,
 			);
@@ -348,7 +343,6 @@
 				0EF97F691947BF6B00B3803A /* CustomCollectionViewCell.m in Sources */,
 				9BDBE32B194658550045C05B /* AppDelegate.m in Sources */,
 				9BDBE3D9194771590045C05B /* Photo.m in Sources */,
-				0EF97F6619479C8B00B3803A /* User.m in Sources */,
 				9BDBE36F19465C7E0045C05B /* ProfileViewController.m in Sources */,
 				9BDBE37B1946769A0045C05B /* FeedTableViewCell.m in Sources */,
 				9BDBE37219465F750045C05B /* CameraViewController.m in Sources */,
