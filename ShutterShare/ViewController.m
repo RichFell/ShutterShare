@@ -11,25 +11,20 @@
 #import "CameraViewController.h"
 #import "FeedTableViewCell.h"
 
-@interface ViewController ()<PFSignUpViewControllerDelegate, PFLogInViewControllerDelegate>
+@interface ViewController ()<PFSignUpViewControllerDelegate, PFLogInViewControllerDelegate, UITableViewDataSource, UITableViewDelegate>
 @property NSArray *photos;
 @end
 
 @implementation ViewController
 
-//-(id)initWithCoder:(NSCoder *)aDecoder
-//{
-//    if (self = [super initWithCoder:aDecoder])
-//    {
-//        self.parseClassName = @"Photo";
-//    }
-//    return self;
-//}
-
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    self.photos = [NSMutableArray array];
+}
+
+-(void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
     [self queryPhotos];
 }
 
@@ -65,16 +60,27 @@
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     return self.photos.count;
+   
 }
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     FeedTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"CellID"];
-    Photo *photoObject = [self.photos objectAtIndex:indexPath.row];
-    NSString *imageString = [NSString stringWithFormat:@"%@", photoObject.image];
-    cell.imageViewPhoto.image = [UIImage imageWithData:[NSData dataWithContentsOfFile:imageString]];
-    cell.labelCaption.text = photoObject.caption;
+    PFObject *photoObject = [self.photos objectAtIndex:indexPath.row];
+
+    PFFile *imageFile = [photoObject objectForKey:@"image"];
+    [imageFile getDataInBackgroundWithBlock:^(NSData *data, NSError *error) {
+        if (!error) {
+            cell.imageView.image = [UIImage imageWithData:data];
+        }
+    }];
+    cell.labelCaption.text = [photoObject objectForKey:@"caption"];
     return cell;
+}
+
+-(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+{
+    return self.photos.count;
 }
 
 -(void)unwindSegue: (UIStoryboardSegue *)segue
@@ -87,8 +93,8 @@
     PFQuery *query = [PFQuery queryWithClassName:@"Photo"];
     [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
         self.photos = [[NSArray alloc]initWithArray:objects];
-
-        NSLog(@"%@", self.photos);
+        [self.tableView reloadData];
+        NSLog(@"%i", self.photos.count);
     }];
 }
 
