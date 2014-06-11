@@ -62,7 +62,7 @@
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     FeedTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"CellID"];
-    PFObject *photoObject = [self.photos objectAtIndex:indexPath.row];
+    PFObject *photoObject = [self.photos objectAtIndex:indexPath.section];
 
     PFFile *imageFile = [photoObject objectForKey:@"image"];
     [imageFile getDataInBackgroundWithBlock:^(NSData *data, NSError *error) {
@@ -77,23 +77,25 @@
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
+    return 1;
+}
+
+-(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+{
     return self.photos.count;
 }
 
-//-(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
-//{
-//    return self.photos.count;
-//}
-//
-//-(NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
-//{
-//    PFObject *photo = [self.photos objectAtIndex:section];
-//    return  [photo objectForKey:@"user"];
-//}
+-(NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
+{
+    PFObject *photo = [self.photos objectAtIndex:section];
+    PFUser *user = [photo objectForKey:@"user"];
+    return  [user objectForKey:@"username"];
+}
 
 -(void)queryPhotos
 {
     PFQuery *query = [PFQuery queryWithClassName:@"Photo"];
+    [query includeKey:@"user"];
     [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
         if (!error)
         {
