@@ -79,12 +79,22 @@
     [query2 whereKey:@"name" containsString:string];
     PFQuery *query3 = [PFQuery orQueryWithSubqueries:@[query1,query2]];
 
-    NSLog(@"Working");
-    [query3 findObjectsInBackgroundWithBlock:^(NSArray *results, NSError *error) {
-                [self.searchResultsArray addObjectsFromArray:results];
+    NSLog(@"Working...");
+    [query3 findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
         NSLog(@"Got the data");
-                [self.tableView reloadData];
-            self.searchButtonOutlet.enabled = YES;
+        
+        NSMutableArray *tempArray = [NSMutableArray new];
+        for (PFObject *object in objects) {
+            if (![[object valueForKey:@"username"] isEqual:[[PFUser currentUser] objectForKey:@"username"]]) {
+                [tempArray addObject:object];
+            }
+            else {
+                NSLog(@"You have just searched for yourself");
+            }
+        }
+        [self.searchResultsArray addObjectsFromArray:tempArray];
+        [self.tableView reloadData];
+        self.searchButtonOutlet.enabled = YES;
     }];
 }
 

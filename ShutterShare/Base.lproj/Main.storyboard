@@ -185,7 +185,7 @@
                                             <outlet property="imageView" destination="oSA-eh-BTg" id="Xqc-Rj-nOq"/>
                                             <outlet property="nameLabel" destination="fGA-mi-DEw" id="cHd-Js-zGB"/>
                                             <outlet property="usernameLabel" destination="mzX-I7-y8u" id="dcR-vg-yBy"/>
-                                            <segue destination="3E9-po-2bg" kind="push" id="IgX-2e-rVj"/>
+                                            <segue destination="3E9-po-2bg" kind="push" id="mJu-3P-1wL"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -262,7 +262,7 @@
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <action selector="onFollowButtonPressed:" destination="3E9-po-2bg" eventType="touchUpInside" id="1TW-Jc-f05"/>
+                                    <action selector="onFollowButtonPressed:" destination="3E9-po-2bg" eventType="touchUpInside" id="pVA-Nd-6TU"/>
                                 </connections>
                             </button>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Wh8-Cy-4zT">
@@ -320,7 +320,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1rW-9T-AP2" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1659" y="-91"/>
+            <point key="canvasLocation" x="1773" y="-109"/>
         </scene>
         <!--Camera View Controller-->
         <scene sceneID="dWb-I5-epR">
@@ -500,7 +500,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zBR-vk-wPR" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1248" y="2028"/>
+            <point key="canvasLocation" x="1242" y="2486"/>
         </scene>
         <!--Edit Profile View Controller-->
         <scene sceneID="vMa-IO-OgW">

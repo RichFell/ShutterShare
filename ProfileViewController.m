@@ -97,7 +97,7 @@
     [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
         if (!error) {
             self.imagefilesArray = [[NSArray alloc] initWithArray:objects];
-            self.userActivityInfoLabel.text = [NSString stringWithFormat:@"%lu, 1, 1,", (unsigned long)self.imagefilesArray.count];
+            self.userActivityInfoLabel.text = [NSString stringWithFormat:@"%lu, 1, %@,", (unsigned long)self.imagefilesArray.count, [[PFUser currentUser] objectForKey:@"totalFollows"]];
         }
         [self.collectionView reloadData];
     }];

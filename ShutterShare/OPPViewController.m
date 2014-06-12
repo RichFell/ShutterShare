@@ -51,6 +51,16 @@
         self.imageView.clipsToBounds = YES;
     }
 }
+- (IBAction)onFollowButtonPressed:(id)sender
+{
+    PFRelation *followRelation = [[PFUser currentUser] relationforKey:@"follows"];
+    [followRelation addObject:self.objectFromSearch];
+    [[PFUser currentUser] incrementKey:@"totalFollows"];
+    [[PFUser currentUser] saveInBackground];
+
+    [sender setTitle:@"Followed" forState:UIControlStateNormal];
+    self.followButtonOutlet.enabled = NO;
+}
 
 # pragma mark - CollectionView Methods
 
