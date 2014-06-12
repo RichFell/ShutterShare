@@ -15,6 +15,7 @@
 @property UIImage *originalImage;
 @property UIImage *newsFeedImage;
 @property UIImage *thumbnailImage;
+@property (weak, nonatomic) IBOutlet UIButton *shareButtonOutlet;
 
 @property UIImagePickerController *imagePickerController;
 
@@ -22,9 +23,17 @@
 
 @implementation CameraViewController
 
-- (void)viewDidLoad
+-(void)viewDidLoad
 {
     [super viewDidLoad];
+    self.shareButtonOutlet.layer.cornerRadius = 5.0f;
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(dismissKeyboard)];
+    [self.view addGestureRecognizer:tap];
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
 
     self.imagePickerController = [UIImagePickerController new];
     self.imagePickerController.delegate = self;
@@ -42,10 +51,6 @@
     }
     self.imagePickerController.mediaTypes = [UIImagePickerController availableMediaTypesForSourceType:self.imagePickerController.sourceType];
     [self presentViewController:self.imagePickerController animated:YES completion:nil];
-
-
-    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(dismissKeyboard)];
-    [self.view addGestureRecognizer:tap];
 }
 
 -(void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
@@ -74,6 +79,9 @@
     [photo1 setObject:[PFUser currentUser] forKey:@"user"];
     [photo1 setObject:photoFile1 forKey:@"thumbnail"];
     [photo1 saveInBackground];
+
+    self.imageView.image = nil;
+    self.textView.text = nil;
 }
 
 -(void)dismissKeyboard

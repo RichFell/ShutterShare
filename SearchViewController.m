@@ -8,12 +8,14 @@
 
 #import "SearchViewController.h"
 #import "CustomSearchCellTableViewCell.h"
+#import "OPPViewController.h"
 
 @interface SearchViewController () <UITableViewDataSource, UITableViewDelegate>
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property NSMutableArray *searchResultsArray;
 @property NSArray *skimmmedResults;
 @property (weak, nonatomic) IBOutlet UISearchBar *searchBar;
+@property (weak, nonatomic) IBOutlet UIButton *searchButtonOutlet;
 
 @end
 
@@ -30,14 +32,11 @@
     [self.searchResultsArray removeAllObjects];
 
     NSString *search = self.searchBar.text;
-    NSString *searchlower = [self.searchBar.text lowercaseString];
-    NSString *searchupper = [self.searchBar.text uppercaseString];
-    NSString *searchcapfirst = [self.searchBar.text capitalizedString];
 
     [self queryParse:search];
-    [self queryParse:searchlower];
-    [self queryParse:searchupper];
-    [self queryParse:searchcapfirst];
+
+    [self.searchBar endEditing:YES];
+    self.searchButtonOutlet.enabled = NO;
 }
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -53,7 +52,7 @@
     cell.nameLabel.text = [object objectForKey:@"name"];
     cell.usernameLabel.text = [object objectForKey:@"username"];
 
-    PFFile *pffile = [object objectForKey:@"profilePic"];
+    PFFile *pffile = [object objectForKey:@"profilePicSmall"];
     [pffile getDataInBackgroundWithBlock:^(NSData *data, NSError *error) {
         cell.imageView.image = [UIImage imageWithData:data];
         cell.imageView.layer.cornerRadius = cell.imageView.frame.size.width/2;
@@ -61,6 +60,15 @@
     }];
 
     return cell;
+}
+
+-(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    NSIndexPath *selectedIndexPath = self.tableView.indexPathForSelectedRow;
+    NSInteger integer = selectedIndexPath.row;
+    PFObject *object = [self.searchResultsArray objectAtIndex:integer];
+    OPPViewController *nextVC = segue.destinationViewController;
+    nextVC.objectFromSearch = object;
 }
 
 -(void)queryParse:(NSString *)string
@@ -71,12 +79,13 @@
     [query2 whereKey:@"name" containsString:string];
     PFQuery *query3 = [PFQuery orQueryWithSubqueries:@[query1,query2]];
 
+    NSLog(@"Working");
     [query3 findObjectsInBackgroundWithBlock:^(NSArray *results, NSError *error) {
                 [self.searchResultsArray addObjectsFromArray:results];
+        NSLog(@"Got the data");
                 [self.tableView reloadData];
+            self.searchButtonOutlet.enabled = YES;
     }];
 }
-
-
 
 @end
