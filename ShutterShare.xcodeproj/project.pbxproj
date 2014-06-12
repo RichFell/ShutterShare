@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0EB31FF5194947CF005A3B82 /* CustomSearchCellTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0EB31FF4194947CF005A3B82 /* CustomSearchCellTableViewCell.m */; };
 		0EBDF93D1948D1D400212FD5 /* SearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0EBDF93C1948D1D400212FD5 /* SearchViewController.m */; };
 		0EF97F63194797F000B3803A /* EditProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0EF97F62194797F000B3803A /* EditProfileViewController.m */; };
 		0EF97F691947BF6B00B3803A /* CustomCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0EF97F681947BF6B00B3803A /* CustomCollectionViewCell.m */; };
@@ -54,6 +55,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0EB31FF3194947CF005A3B82 /* CustomSearchCellTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomSearchCellTableViewCell.h; sourceTree = "<group>"; };
+		0EB31FF4194947CF005A3B82 /* CustomSearchCellTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomSearchCellTableViewCell.m; sourceTree = "<group>"; };
 		0EBDF93B1948D1D400212FD5 /* SearchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SearchViewController.h; path = ../SearchViewController.h; sourceTree = "<group>"; };
 		0EBDF93C1948D1D400212FD5 /* SearchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SearchViewController.m; path = ../SearchViewController.m; sourceTree = "<group>"; };
 		0EF97F61194797F000B3803A /* EditProfileViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditProfileViewController.h; sourceTree = "<group>"; };
@@ -188,6 +191,8 @@
 				9BDBE32A194658550045C05B /* AppDelegate.m */,
 				0EBDF93B1948D1D400212FD5 /* SearchViewController.h */,
 				0EBDF93C1948D1D400212FD5 /* SearchViewController.m */,
+				0EB31FF3194947CF005A3B82 /* CustomSearchCellTableViewCell.h */,
+				0EB31FF4194947CF005A3B82 /* CustomSearchCellTableViewCell.m */,
 				9BDBE32C194658550045C05B /* Main.storyboard */,
 				0EF97F61194797F000B3803A /* EditProfileViewController.h */,
 				0EF97F62194797F000B3803A /* EditProfileViewController.m */,
@@ -339,6 +344,7 @@
 			files = (
 				9BDBE36C19465C6B0045C05B /* FriendsViewController.m in Sources */,
 				9BDBE331194658550045C05B /* ViewController.m in Sources */,
+				0EB31FF5194947CF005A3B82 /* CustomSearchCellTableViewCell.m in Sources */,
 				0EF97F63194797F000B3803A /* EditProfileViewController.m in Sources */,
 				0EF97F691947BF6B00B3803A /* CustomCollectionViewCell.m in Sources */,
 				9BDBE32B194658550045C05B /* AppDelegate.m in Sources */,

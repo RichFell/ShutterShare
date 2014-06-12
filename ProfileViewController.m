@@ -73,7 +73,7 @@
     CustomCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"collectioncell" forIndexPath:indexPath];
 
     PFObject *imageObject = [self.imagefilesArray objectAtIndex:indexPath.row];
-    PFFile *imageFile = [imageObject objectForKey:@"image"];
+    PFFile *imageFile = [imageObject objectForKey:@"thumbnail"];
     [imageFile getDataInBackgroundWithBlock:^(NSData *data, NSError *error) {
         if (!error) {
             cell.imageView.image = [UIImage imageWithData:data];
@@ -86,7 +86,7 @@
 
 - (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout minimumInteritemSpacingForSectionAtIndex:(NSInteger)section
 {
-    return 1.0;
+    return 0.0;
 }
 
 # pragma mark - Helper methods
