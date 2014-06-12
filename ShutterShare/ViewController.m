@@ -14,7 +14,7 @@
 
 @interface ViewController ()<PFSignUpViewControllerDelegate, PFLogInViewControllerDelegate, UITableViewDataSource, UITableViewDelegate>
 @property NSArray *photos;
-@property NSArray *commentArray;
+@property NSMutableArray *commentArray;
 
 @end
 
@@ -24,6 +24,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+
 }
 
 -(void)viewWillAppear:(BOOL)animated
@@ -69,22 +70,24 @@
 {
     FeedTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"CellID"];
     PFObject *photoObject = [self.photos objectAtIndex:indexPath.section];
-
-    [self queryCommentsForPhoto:photoObject];
-
     PFFile *imageFile = [photoObject objectForKey:@"image"];
+
     [imageFile getDataInBackgroundWithBlock:^(NSData *data, NSError *error) {
-        if (!error) {
+        if (!error)
+        {
             cell.imageViewPhoto.image = [UIImage imageWithData:data];
         }
-        [self.tableView reloadData];
     }];
+
     cell.labelCaption.text = [photoObject objectForKey:@"caption"];
+
+    NSLog(@"%@", self.commentArray);
+
     if (self.commentArray.count != 0)
     {
         cell.commentTextField.text = [NSString stringWithFormat:@"%@",[[self.commentArray objectAtIndex:0]objectForKey:@"commentText"]];
+        [self.commentArray removeAllObjects];
     }
-
     return cell;
 }
 
@@ -105,6 +108,37 @@
     return  [user objectForKey:@"username"];
 }
 
+-(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
+{
+    UIView *headerView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, 320, 30)];
+    UILabel *sectionTitle = [[UILabel alloc]initWithFrame:CGRectMake(10, 0, 320, 30)];
+    PFObject *photo = [self.photos objectAtIndex:section];
+    PFUser *user = [photo objectForKey:@"user"];
+    sectionTitle.text = [NSString stringWithFormat:@"     %@",[user objectForKey:@"username"]];
+    sectionTitle.shadowColor = [UIColor colorWithWhite:0 alpha:0.4];
+    sectionTitle.shadowOffset = CGSizeMake(1, 1);
+    sectionTitle.backgroundColor = [UIColor colorWithWhite:1.0 alpha:0.8];
+
+    UIImageView *headerImage = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, 30, 30)];
+    if ([[PFUser currentUser] objectForKey:@"profilePic"]) {
+        PFFile *pffile = [user objectForKey:@"profilePic"];
+        [pffile getDataInBackgroundWithBlock:^(NSData *data, NSError *error) {
+            headerImage.image = [UIImage imageWithData:data];
+            headerImage.layer.cornerRadius = headerImage.frame.size.width /2;
+            headerImage.clipsToBounds = YES;
+        }];
+    }
+    else
+    {
+        headerImage.image = [UIImage imageNamed:@"bear"];
+        headerImage.layer.cornerRadius = headerImage.frame.size.width /2;
+        headerImage.clipsToBounds = YES;
+    }
+    [headerView addSubview:sectionTitle];
+    [headerView addSubview:headerImage];
+    return headerView;
+}
+
 #pragma mark -Query Helper Methods
 
 -(void)queryPhotos
@@ -115,28 +149,22 @@
         if (!error)
         {
             self.photos = [[NSArray alloc]initWithArray:objects];
+            for (Photo *photo in self.photos)
+            {
+                [self queryCommentsForPhoto:photo];
+            }
+            [self.tableView reloadData];
         }
-        [self.tableView reloadData];
     }];
+    [self.commentArray removeAllObjects];
 }
 
 -(void)queryCommentsForPhoto: (PFObject *)photo
 {
-//    PFQuery *query = [PFQuery queryWithClassName:@"Comment"];
-//    [query whereKey:@"commentPhoto" equalTo:photo];
-//    [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
-//        if (!error)
-//        {
-//            self.commentArray = [[NSArray alloc]initWithArray:objects];
-//        }
-//        [self.tableView reloadData];
-//    }];
-
     PFRelation *relation = [photo relationForKey:@"comments"];
     PFQuery *query = [relation query];
-    [query includeKey:@"comments"];
     [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
-        self.commentArray = [[NSArray alloc]initWithArray:objects];
+        self.commentArray = [[NSMutableArray alloc]initWithArray:objects];
     }];
 }
 
@@ -146,10 +174,7 @@
     UIButton *btn = (UIButton*) sender;
     UITableViewCell *cell = (UITableViewCell*) [btn superview];
     NSIndexPath *indexPath = [self.tableView indexPathForCell:cell];
-    int row = indexPath.row;
-//    NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
-//    NSLog(@"%@", sender);
-    Photo *photo = [self.photos objectAtIndex:row];
+    Photo *photo = [self.photos objectAtIndex:indexPath.section];
 
     commentVC.photo = photo;
 }
