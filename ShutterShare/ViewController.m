@@ -13,7 +13,7 @@
 
 @interface ViewController ()<PFSignUpViewControllerDelegate, PFLogInViewControllerDelegate, UITableViewDataSource, UITableViewDelegate>
 @property NSArray *photos;
-@property NSMutableArray *commentArray;
+@property NSArray *commentArray;
 
 @end
 
@@ -23,15 +23,13 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    self.commentArray = [NSMutableArray array];
-
 }
+
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
     [self queryPhotos];
 }
-
 
 -(void)viewDidAppear:(BOOL)animated
 {
@@ -47,6 +45,8 @@
     }
 }
 
+#pragma mark -Login methods
+
 -(void)logInViewController:(PFLogInViewController *)logInController didLogInUser:(PFUser *)user
 {
     [self dismissViewControllerAnimated:YES completion:nil];
@@ -56,6 +56,8 @@
 {
     NSLog(@"Fail to Login");
 }
+
+#pragma mark -TableView Delegate Methods
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -77,7 +79,19 @@
         [self.tableView reloadData];
     }];
     cell.labelCaption.text = [photoObject objectForKey:@"caption"];
-//    cell.commentTextField.text = [NSString stringWithFormat:@"%@/n%@/n%@", [self.commentArray objectAtIndex:0], [self.commentArray objectAtIndex:1], [self.commentArray objectAtIndex:2]];
+    if (!self.commentArray) {
+    cell.commentTextField.text = [NSString stringWithFormat:@"%@:%@/n%@:%@/n%@:%@/",
+                                  [[[self.commentArray objectAtIndex:0]objectForKey:@"user"]objectForKey:@"username"],
+                                  [[self.commentArray objectAtIndex:0]objectForKey:@"commentText"],
+                                  [[[self.commentArray objectAtIndex:1]objectForKey:@"user"]objectForKey:@"username"],
+                                  [[self.commentArray objectAtIndex:1]objectForKey:@"commentText"],
+                                  [[[self.commentArray objectAtIndex:2]objectForKey:@"user"]objectForKey:@"username"],
+                                  [[self.commentArray objectAtIndex:2]objectForKey:@"commentText"]];
+    }
+    else
+    {
+        cell.commentTextField.text = @"No comments";
+    }
     return cell;
 }
 
@@ -98,6 +112,8 @@
     return  [user objectForKey:@"username"];
 }
 
+#pragma mark -Query Helper Methods
+
 -(void)queryPhotos
 {
     PFQuery *query = [PFQuery queryWithClassName:@"Photo"];
@@ -108,24 +124,17 @@
             self.photos = [[NSArray alloc]initWithArray:objects];
         }
         [self.tableView reloadData];
-        NSLog(@"%i", self.photos.count);
     }];
 }
 
 -(void)queryCommentsForPhoto: (PFObject *)photo
 {
     PFQuery *query = [PFQuery queryWithClassName:@"Comment"];
-    [query whereKey:@"photo" equalTo:photo];
+    [query whereKey:@"commentPhoto" equalTo:photo];
     [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
         if (!error)
         {
-//            self.commentArray = [[NSArray alloc]initWithArray:objects];
-            for (PFObject *commentObject in objects)
-            {
-                NSString *comment = [commentObject objectForKey:@"commentText"];
-                [self.commentArray addObject:comment];
-
-            }
+            self.commentArray = [[NSArray alloc]initWithArray:objects];
         }
         [self.tableView reloadData];
     }];

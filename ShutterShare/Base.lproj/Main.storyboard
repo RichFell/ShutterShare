@@ -8,16 +8,16 @@
         <scene sceneID="ddI-a7-cUH">
             <objects>
                 <tableViewController id="epK-aH-Tux" customClass="ViewController" sceneMemberID="viewController">
-                    <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="352" sectionHeaderHeight="22" sectionFooterHeight="22" id="bRx-zx-9GK">
+                    <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="377" sectionHeaderHeight="22" sectionFooterHeight="22" id="bRx-zx-9GK">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="CellID" rowHeight="352" id="ro8-40-vVX" customClass="FeedTableViewCell">
-                                <rect key="frame" x="0.0" y="86" width="320" height="352"/>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="CellID" rowHeight="377" id="ro8-40-vVX" customClass="FeedTableViewCell">
+                                <rect key="frame" x="0.0" y="86" width="320" height="377"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="ro8-40-vVX" id="md0-Ji-9Wt">
-                                    <rect key="frame" x="0.0" y="0.0" width="320" height="351"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="320" height="376"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="nhg-Tj-TfC" customClass="PFImageView">
@@ -31,7 +31,7 @@
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="XjR-bC-Za8">
-                                            <rect key="frame" x="20" y="260" width="240" height="84"/>
+                                            <rect key="frame" x="20" y="260" width="240" height="76"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                             <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
@@ -39,10 +39,10 @@
                                             <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                         </textView>
                                         <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rRt-57-fhX">
-                                            <rect key="frame" x="268" y="287" width="32" height="30"/>
+                                            <rect key="frame" x="43" y="344" width="77" height="24"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="28"/>
-                                            <state key="normal" title="+">
+                                            <fontDescription key="fontDescription" type="system" pointSize="11"/>
+                                            <state key="normal" title="Comments">
                                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                             </state>
                                         </button>
@@ -65,6 +65,24 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Bi1-Cj-V4f" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1380" y="-844"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="N9A-9Y-7xv">
+            <objects>
+                <viewController id="I9W-6p-Tde" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="VeL-6Z-aem"/>
+                        <viewControllerLayoutGuide type="bottom" id="MdG-r2-GU9"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="dnV-eW-vGA">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="DAO-D5-F9O" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1747" y="-838"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="baZ-rS-4jb">
