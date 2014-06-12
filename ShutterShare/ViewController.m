@@ -10,6 +10,7 @@
 #import "Photo.h"
 #import "CameraViewController.h"
 #import "FeedTableViewCell.h"
+#import "CommentViewController.h"
 
 @interface ViewController ()<PFSignUpViewControllerDelegate, PFLogInViewControllerDelegate, UITableViewDataSource, UITableViewDelegate>
 @property NSArray *photos;
@@ -79,19 +80,11 @@
         [self.tableView reloadData];
     }];
     cell.labelCaption.text = [photoObject objectForKey:@"caption"];
-    if (!self.commentArray) {
-    cell.commentTextField.text = [NSString stringWithFormat:@"%@:%@/n%@:%@/n%@:%@/",
-                                  [[[self.commentArray objectAtIndex:0]objectForKey:@"user"]objectForKey:@"username"],
-                                  [[self.commentArray objectAtIndex:0]objectForKey:@"commentText"],
-                                  [[[self.commentArray objectAtIndex:1]objectForKey:@"user"]objectForKey:@"username"],
-                                  [[self.commentArray objectAtIndex:1]objectForKey:@"commentText"],
-                                  [[[self.commentArray objectAtIndex:2]objectForKey:@"user"]objectForKey:@"username"],
-                                  [[self.commentArray objectAtIndex:2]objectForKey:@"commentText"]];
-    }
-    else
+    if (self.commentArray.count != 0)
     {
-        cell.commentTextField.text = @"No comments";
+        cell.commentTextField.text = [NSString stringWithFormat:@"%@",[[self.commentArray objectAtIndex:0]objectForKey:@"commentText"]];
     }
+
     return cell;
 }
 
@@ -129,16 +122,36 @@
 
 -(void)queryCommentsForPhoto: (PFObject *)photo
 {
-    PFQuery *query = [PFQuery queryWithClassName:@"Comment"];
-    [query whereKey:@"commentPhoto" equalTo:photo];
+//    PFQuery *query = [PFQuery queryWithClassName:@"Comment"];
+//    [query whereKey:@"commentPhoto" equalTo:photo];
+//    [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+//        if (!error)
+//        {
+//            self.commentArray = [[NSArray alloc]initWithArray:objects];
+//        }
+//        [self.tableView reloadData];
+//    }];
+
+    PFRelation *relation = [photo relationForKey:@"comments"];
+    PFQuery *query = [relation query];
+    [query includeKey:@"comments"];
     [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
-        if (!error)
-        {
-            self.commentArray = [[NSArray alloc]initWithArray:objects];
-        }
-        [self.tableView reloadData];
+        self.commentArray = [[NSArray alloc]initWithArray:objects];
     }];
 }
 
+-(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    CommentViewController *commentVC = segue.destinationViewController;
+    UIButton *btn = (UIButton*) sender;
+    UITableViewCell *cell = (UITableViewCell*) [btn superview];
+    NSIndexPath *indexPath = [self.tableView indexPathForCell:cell];
+    int row = indexPath.row;
+//    NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
+//    NSLog(@"%@", sender);
+    Photo *photo = [self.photos objectAtIndex:row];
+
+    commentVC.photo = photo;
+}
 
 @end

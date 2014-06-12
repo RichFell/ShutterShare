@@ -41,6 +41,7 @@
 		9BDBE37219465F750045C05B /* CameraViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BDBE37119465F750045C05B /* CameraViewController.m */; };
 		9BDBE37B1946769A0045C05B /* FeedTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BDBE37A1946769A0045C05B /* FeedTableViewCell.m */; };
 		9BDBE3D9194771590045C05B /* Photo.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BDBE3D8194771590045C05B /* Photo.m */; };
+		9BDBE464194926D80045C05B /* CommentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BDBE463194926D80045C05B /* CommentViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -101,6 +102,8 @@
 		9BDBE37A1946769A0045C05B /* FeedTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FeedTableViewCell.m; path = ../FeedTableViewCell.m; sourceTree = "<group>"; };
 		9BDBE3D7194771590045C05B /* Photo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Photo.h; path = ../Photo.h; sourceTree = "<group>"; };
 		9BDBE3D8194771590045C05B /* Photo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Photo.m; path = ../Photo.m; sourceTree = "<group>"; };
+		9BDBE462194926D80045C05B /* CommentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CommentViewController.h; path = ../CommentViewController.h; sourceTree = "<group>"; };
+		9BDBE463194926D80045C05B /* CommentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CommentViewController.m; path = ../CommentViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -201,6 +204,8 @@
 				0EF97F681947BF6B00B3803A /* CustomCollectionViewCell.m */,
 				9BDBE37019465F750045C05B /* CameraViewController.h */,
 				9BDBE37119465F750045C05B /* CameraViewController.m */,
+				9BDBE462194926D80045C05B /* CommentViewController.h */,
+				9BDBE463194926D80045C05B /* CommentViewController.m */,
 				9BDBE3791946769A0045C05B /* FeedTableViewCell.h */,
 				9BDBE37A1946769A0045C05B /* FeedTableViewCell.m */,
 				9BDBE3D7194771590045C05B /* Photo.h */,
@@ -337,6 +342,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9BDBE464194926D80045C05B /* CommentViewController.m in Sources */,
 				9BDBE36C19465C6B0045C05B /* FriendsViewController.m in Sources */,
 				9BDBE331194658550045C05B /* ViewController.m in Sources */,
 				0EF97F63194797F000B3803A /* EditProfileViewController.m in Sources */,
