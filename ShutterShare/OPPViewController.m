@@ -1,33 +1,31 @@
 //
-//  ProfileViewController.m
+//  OPPViewController.m
 //  ShutterShare
 //
-//  Created by Richard Fellure on 6/9/14.
+//  Created by David Warner on 6/12/14.
 //  Copyright (c) 2014 Rich. All rights reserved.
 //
 
-#import "ProfileViewController.h"
-#import <Parse/Parse.h>
-#import "Photo.h"
+#import "OPPViewController.h"
 #import "CustomCollectionViewCell.h"
 
-@interface ProfileViewController () <UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout>
-@property (weak, nonatomic) IBOutlet UILabel *userActivityInfoLabel;
+@interface OPPViewController ()
+@property (weak, nonatomic) IBOutlet UILabel *userInformationLabel;
 @property (weak, nonatomic) IBOutlet UILabel *nameLabel;
 @property (weak, nonatomic) IBOutlet UIImageView *imageView;
+@property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
 @property (strong) NSMutableArray *imagesArray;
 @property NSArray *imagefilesArray;
-@property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
-@property (weak, nonatomic) IBOutlet UIButton *editProfileButtonOutlet;
+@property (weak, nonatomic) IBOutlet UIButton *followButtonOutlet;
 
 @end
 
-@implementation ProfileViewController
+@implementation OPPViewController
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    self.editProfileButtonOutlet.layer.cornerRadius = 5.0f;
+    self.followButtonOutlet.layer.cornerRadius = 5.0f;
 }
 
 -(void)viewWillAppear:(BOOL)animated
@@ -35,12 +33,11 @@
     [super viewWillAppear:animated];
     [self queryParseForImages];
 
-    self.navigationItem.title = [PFUser currentUser].username;
-    self.navigationItem.title = [[PFUser currentUser] objectForKey:@"username"];
-    self.nameLabel.text = [[PFUser currentUser] objectForKey:@"name"];
+    self.navigationItem.title = [self.objectFromSearch objectForKey:@"username"];
+    self.nameLabel.text = [self.objectFromSearch objectForKey:@"name"];
 
-    if ([[PFUser currentUser] objectForKey:@"profilePic"]) {
-        PFFile *pffile = [[PFUser currentUser] objectForKey:@"profilePic"];
+    if ([self.objectFromSearch objectForKey:@"profilePic"]) {
+        PFFile *pffile = [self.objectFromSearch objectForKey:@"profilePic"];
         [pffile getDataInBackgroundWithBlock:^(NSData *data, NSError *error) {
             self.imageView.image = [UIImage imageWithData:data];
             self.imageView.layer.cornerRadius = self.imageView.frame.size.width /2;
@@ -93,15 +90,16 @@
 -(void)queryParseForImages
 {
     PFQuery *query = [PFQuery queryWithClassName:@"Photo"];
-    [query whereKey:@"user" equalTo:[PFUser currentUser]];
+    [query whereKey:@"user" equalTo:self.objectFromSearch];
     [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
         if (!error) {
             self.imagefilesArray = [[NSArray alloc] initWithArray:objects];
-            self.userActivityInfoLabel.text = [NSString stringWithFormat:@"%lu, 1, 1,", (unsigned long)self.imagefilesArray.count];
+            self.userInformationLabel.text = [NSString stringWithFormat:@"%lu, 1, 1,", (unsigned long)self.imagefilesArray.count];
         }
         [self.collectionView reloadData];
     }];
 }
+
 
 
 @end

@@ -12,6 +12,7 @@
 
 @interface EditProfileViewController () <UIImagePickerControllerDelegate, UINavigationControllerDelegate, UIAlertViewDelegate>
 @property (weak, nonatomic) IBOutlet UIImageView *imageView;
+@property UIImage *smallImage;
 @property UIImagePickerController *imagePickerController;
 @property (weak, nonatomic) IBOutlet UITextField *nameTextField;
 @property (weak, nonatomic) IBOutlet UITextField *emailTextField;
@@ -51,13 +52,6 @@
     self.bioTextField.text = [[PFUser currentUser] objectForKey:@"about"];
     self.usernameTextField.text = [[PFUser currentUser] objectForKey:@"username"];
 
-    self.nameTextField.borderStyle = UITextBorderStyleLine;
-    self.emailTextField.borderStyle = UITextBorderStyleLine;
-    self.websiteTextField.borderStyle = UITextBorderStyleLine;
-    self.telephoneTextField.borderStyle = UITextBorderStyleLine;
-    self.bioTextField.borderStyle = UITextBorderStyleLine;
-    self.usernameTextField.borderStyle = UITextBorderStyleLine;
-
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(dismissKeyboard)];
     [self.view addGestureRecognizer:tap];
 }
@@ -84,7 +78,11 @@
 {
     [picker dismissViewControllerAnimated:YES completion:nil];
     UIImage *image = [info objectForKey:UIImagePickerControllerOriginalImage];
+    [self createSizedImages:image Imagesize:30.0];
+
     self.imageView.image = image;
+    self.imageView.layer.cornerRadius = self.imageView.frame.size.width /2;
+    self.imageView.clipsToBounds = YES;
 }
 
 - (IBAction)onSaveButtonPressed:(id)sender
@@ -93,6 +91,13 @@
     NSData *imageData = UIImagePNGRepresentation(self.imageView.image);
     PFFile *photoFile = [PFFile fileWithData:imageData];
     [photo setObject:[PFUser currentUser] forKey:@"user"];
+    [[PFUser currentUser] setObject:photoFile forKey:@"profilePic"];
+    [photo saveInBackground];
+
+    NSData *imageData1 = UIImagePNGRepresentation(self.smallImage);
+    PFFile *photoFile1 = [PFFile fileWithData:imageData1];
+    [[PFUser currentUser] setObject:photoFile1 forKey:@"profilePicSmall"];
+    [[PFUser currentUser] saveInBackground];
 
     [[PFUser currentUser] setObject:self.bioTextField.text forKey:@"about"];
     [[PFUser currentUser] setObject:self.usernameTextField.text forKey:@"username"];
@@ -114,6 +119,41 @@
 -(void)dismissKeyboard
 {
     [self.view endEditing:YES];
+}
+
+-(void)createSizedImages:(UIImage *)image Imagesize:(CGFloat)imagesize
+{
+    CGFloat thumbnailsize = imagesize;
+    CGSize size = image.size;
+    CGSize croppedSize;
+
+    CGFloat offsetX = 0.0;
+    CGFloat offsetY = 0.0;
+
+    // check the size of the image, we want to make it
+    // a square with sides the size of the smallest dimension.
+    // So clip the extra portion from x or y coordinate
+    if (size.width > size.height) {
+        offsetX = (size.height - size.width) / 2;
+        croppedSize = CGSizeMake(size.height, size.height);
+    } else {
+        offsetY = (size.width - size.height) / 2;
+        croppedSize = CGSizeMake(size.width, size.width);
+    }
+
+    // Crop the image before resize
+    CGRect clippedRect = CGRectMake(offsetX * -1, offsetY * -1, croppedSize.width, croppedSize.height);
+    CGImageRef imageRef = CGImageCreateWithImageInRect([image CGImage], clippedRect);
+    // Done cropping
+
+    // Resize the image
+    CGRect rect = CGRectMake(0.0, 0.0, thumbnailsize, thumbnailsize);
+
+    UIGraphicsBeginImageContext(rect.size);
+    [[UIImage imageWithCGImage:imageRef] drawInRect:rect];
+    self.smallImage = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    // Done Resizing
 }
 
 @end
